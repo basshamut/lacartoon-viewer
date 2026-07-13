@@ -1,0 +1,49 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Android
+android/.gradle
+android/app/build
+android/build
+android/capacitor-cordova-android-plugins/build
+*.keystore
+!debug.keystore
+
+# iOS
+ios/App/build
+ios/App/Pods
+ios/App.xcworkspace/xcuserdata
+ios/App.xcodeproj/xcuserdata
+DerivedData
+
+# Scraper
+scraper/venv
+scraper/__pycache__
+scraper/*.log
+
+# Environment
+.env
+.env.*
+!.env.example
