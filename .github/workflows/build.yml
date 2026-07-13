@@ -136,10 +136,6 @@ jobs:
       - name: Build web app
         run: pnpm build
 
-      - name: Install CocoaPods
-        working-directory: ios/App
-        run: pod install --repo-update
-
       - name: Sync Capacitor
         run: npx cap sync ios
 
@@ -176,7 +172,7 @@ jobs:
           CODE_SIGN_IDENTITY: ${{ steps.check-signing.outputs.available == 'true' && secrets.IOS_CODE_SIGN_IDENTITY || '-' }}
           DEVELOPMENT_TEAM: ${{ steps.check-signing.outputs.available == 'true' && secrets.IOS_TEAM_ID || '' }}
         run: |
-          xcodebuild -workspace App.xcworkspace \
+          xcodebuild -project App.xcodeproj \
             -scheme App \
             -configuration Release \
             -archivePath $RUNNER_TEMP/App.xcarchive \
