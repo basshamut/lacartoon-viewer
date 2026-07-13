@@ -72,30 +72,31 @@ jobs:
 
       - name: Decode keystore
         if: steps.check-keystore.outputs.available == 'true' && github.event_name != 'pull_request'
-        run: echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/release.keystore
+        run: echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/debug.jks
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
 
-      - name: Build Release AAB
+      - name: Build Release APK
         if: steps.check-keystore.outputs.available == 'true' && github.event_name != 'pull_request'
         working-directory: android
         env:
+          KEYSTORE_FILE: debug.jks
           KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-        run: ./gradlew bundleRelease --no-daemon
+        run: ./gradlew assembleRelease --no-daemon
 
       - name: Build Debug APK
         if: steps.check-keystore.outputs.available != 'true' || github.event_name == 'pull_request'
         working-directory: android
         run: ./gradlew assembleDebug --no-daemon
 
-      - name: Upload Release AAB
+      - name: Upload Release APK
         if: steps.check-keystore.outputs.available == 'true' && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: lacartoons-android-release
-          path: android/app/build/outputs/bundle/release/*.aab
+          path: android/app/build/outputs/apk/release/*.apk
           if-no-files-found: warn
           retention-days: 30
 

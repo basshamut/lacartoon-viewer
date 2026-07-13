@@ -47,3 +47,4 @@ scraper/*.log
 .env
 .env.*
 !.env.example
+debug.jks
