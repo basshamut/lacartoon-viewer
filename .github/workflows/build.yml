@@ -136,15 +136,12 @@ jobs:
       - name: Build web app
         run: pnpm build
 
-      - name: Add iOS platform
-        run: npx cap add ios || true
-
-      - name: Sync Capacitor
-        run: npx cap sync ios
-
       - name: Install CocoaPods
         working-directory: ios/App
         run: pod install --repo-update
+
+      - name: Sync Capacitor
+        run: npx cap sync ios
 
       - name: Check signing secret
         id: check-signing
