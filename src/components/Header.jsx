@@ -6,7 +6,7 @@ export default function Header() {
     <header className="bg-gradient-to-r from-purple-900 via-purple-700 to-indigo-800 text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <Link to="/" className="text-2xl font-bold tracking-tight hover:opacity-90 transition-opacity whitespace-nowrap">
-          LaCartoons
+          LaCartoons Next
         </Link>
         <SearchBar />
         <nav className="flex gap-4 text-sm font-medium">
